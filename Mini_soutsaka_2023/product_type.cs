@@ -50,7 +50,41 @@ namespace Mini_soutsaka_2023
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            txtid.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            txtname.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("insert into unit values(@u_name)", cd.conder);
+            cmd.Parameters.AddWithValue("@u_name", txtname.Text);
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+                sadaeng();
+                txtname.Clear();
+                MessageBox.Show("Save Successfuly");
+            }
+            else
+            {
+                MessageBox.Show("Save not found!!!");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("update unit set u_name=@u_name where u_id=@u_id", cd.conder);
+            cmd.Parameters.AddWithValue("@u_id", txtid.Text);
+            cmd.Parameters.AddWithValue("@u_name", txtname.Text);
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+                sadaeng();
+                txtname.Clear();
+                MessageBox.Show("Update Successfuly");
+            }
+            else
+            {
+                MessageBox.Show("Update not found!!!");
+            }
         }
     }
 }

@@ -43,7 +43,8 @@ namespace Mini_soutsaka_2023
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            txtid.Text=dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            txtname.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
         }
 
         private void product_list_Load(object sender, EventArgs e)
@@ -65,6 +66,44 @@ namespace Mini_soutsaka_2023
             else
             {
                 MessageBox.Show("Save not found!!!");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("update type_product set t_name=@t_name where t_id=@t_id", cd.conder);
+            cmd.Parameters.AddWithValue("@t_id", txtid.Text);
+            cmd.Parameters.AddWithValue("@t_name", txtname.Text);
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+                sadaeng();
+                txtname.Clear();
+                MessageBox.Show("Update Successfuly");
+            }
+            else
+            {
+                MessageBox.Show("Update not found!!!");
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("delete type_product where t_id=@t_id", cd.conder);
+            cmd.Parameters.AddWithValue("@t_id", txtid.Text);
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+                sadaeng();
+                txtname.Clear();
+                MessageBox.Show("Delete Successfuly");
+            }
+            else
+            {
+                MessageBox.Show("Delete not found!!!");
             }
         }
     }
