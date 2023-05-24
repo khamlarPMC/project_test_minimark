@@ -86,5 +86,30 @@ namespace Mini_soutsaka_2023
                 MessageBox.Show("Update not found!!!");
             }
         }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            da = new SqlDataAdapter("select * from unit where u_name like N'" + txtsearch.Text + "%'", cd.conder);
+            da.Fill(ds);
+            ds.Tables[0].Rows.Clear();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            cmd = new SqlCommand("delete unit where u_id=@u_id", cd.conder);
+            cmd.Parameters.AddWithValue("@u_id", txtid.Text);
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+                sadaeng();
+                txtname.Clear();
+                MessageBox.Show("Delete Successfuly");
+            }
+            else
+            {
+                MessageBox.Show("Delete not found!!!");
+            }
+        }
     }
 }

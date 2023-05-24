@@ -28,6 +28,13 @@ namespace Mini_soutsaka_2023
             ds.Tables.Clear();
             da.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0];
+
+            dataGridView1.Columns[0].HeaderText = "ລະຫັດ";
+            dataGridView1.Columns[1].HeaderText = "ຊື່ສິນຄ້າ";
+            dataGridView1.Columns[2].HeaderText = "ປະເພດ";
+            dataGridView1.Columns[3].HeaderText = "ຈຳນວນ";
+            dataGridView1.Columns[4].HeaderText = "ຫົວໜ່ວຍ";
+            dataGridView1.Columns[5].HeaderText = "ລາຄາ";
         }
 
         public Form1()

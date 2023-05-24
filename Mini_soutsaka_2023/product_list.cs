@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Drawing.Imaging;
 using Microsoft.SqlServer;
+using System.Data.Common;
 
 namespace Mini_soutsaka_2023
 {
@@ -105,6 +106,15 @@ namespace Mini_soutsaka_2023
             {
                 MessageBox.Show("Delete not found!!!");
             }
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            da = new SqlDataAdapter("select * from type_product where t_name like N'"+txtsearch.Text+"%'",cd.conder);
+            da.Fill(ds);
+            ds.Tables[0].Rows.Clear();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
         }
     }
 }
